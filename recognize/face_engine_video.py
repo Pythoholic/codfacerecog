@@ -49,6 +49,8 @@ while True:
 
     for encoding in face_encodings:
         match = face_recognition.compare_faces(known_faces, encoding, tolerance=0.50)
+        # match = [False, True, True, False , False]
+
         name = ""
         if match[0]:
             name = "Alex"
@@ -64,10 +66,10 @@ while True:
         facial_names.append(name)
 
     for (top, right, bottom, left), name in zip(facial_points, facial_names):
-        # Draw a box around the face
+        # Enclose the face with the box - Red color 
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
 
-        # Draw a label with a name below the face
+        # Name the characters in the Box created above
         cv2.rectangle(frame, (left, bottom - 25), (right, bottom), (0, 0, 255), cv2.FILLED)
         font = cv2.FONT_HERSHEY_DUPLEX
         cv2.putText(frame, name, (left + 6, bottom - 6), font, 0.5, (255, 255, 255), 1)
