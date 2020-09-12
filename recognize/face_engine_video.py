@@ -6,7 +6,7 @@ import face_recognition
 # Import your video file
 video_file = cv2.VideoCapture(os.path.abspath("recognize/videos/cod_trailer_1.mp4"))
 
-# Capture the lenght based on the frame.
+# Capture the length based on the frame.
 length = int(video_file.get(cv2.CAP_PROP_FRAME_COUNT))
 
 # We need to add all the faces that we want our code to recognize
@@ -39,16 +39,15 @@ while True:
     
     if not return_value:
         break
-
     rgb_frame = frame[:, :, ::-1]
 
     facial_points = face_recognition.face_locations(rgb_frame, model="cnn")
     face_encodings = face_recognition.face_encodings(rgb_frame, facial_points)
 
     facial_names = []
-
     for encoding in face_encodings:
         match = face_recognition.compare_faces(known_faces, encoding, tolerance=0.50)
+        # alex_face_1, badguy_face_1, farah_face_1, laswell_face_1, price_face_1
         # match = [False, True, True, False , False]
 
         name = ""
@@ -67,6 +66,7 @@ while True:
 
     for (top, right, bottom, left), name in zip(facial_points, facial_names):
         # Enclose the face with the box - Red color 
+        # top, right, bottom, left - 129, 710, 373, 465
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
 
         # Name the characters in the Box created above
