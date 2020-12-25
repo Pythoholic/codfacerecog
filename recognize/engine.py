@@ -1,5 +1,5 @@
 # This is a test comment 
-# Testing GITHUB features for demo # My conflict -- local changes
+# Testing GITHUB features for demo -- remote changes
 import face_recognition
 import cv2
 import numpy as np
